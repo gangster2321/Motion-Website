@@ -1,0 +1,200 @@
+/* ==========================================================================
+   Main Stylesheet Entry Point
+   Architecture: base -> components -> utilities (ITCSS-style ordering,
+   each layer only overrides what came before it).
+   ========================================================================== */
+
+/* -------- base -------- */
+@import url('base/variables.css');
+@import url('base/reset.css');
+
+/* -------- components -------- */
+@import url('components/cursor.css');
+@import url('components/halftone-dots.css');      /* NEW: cipher.tv inspired dot frame */
+@import url('components/floating-thumbnails.css'); /* NEW: 3D thumbnail cluster */
+@import url('components/page-wipe.css');
+@import url('components/loader.css');           /* NEW: volt-green wipe transition */
+@import url('components/nav.css');
+@import url('components/hero.css');
+@import url('components/toolsbar.css');
+@import url('components/section.css');
+@import url('components/statement.css');
+@import url('components/work.css');
+@import url('components/video-player.css');
+@import url('components/services.css');
+@import url('components/timeline.css');
+@import url('components/education.css');
+@import url('components/clay-icons.css'); /* Reverted to original services style */
+@import url('components/scroll-stroke.css');
+@import url('components/closing.css');
+@import url('components/shine-border.css');
+@import url('components/progressive-blur.css');
+@import url('components/footer.css');
+
+/* -------- utilities -------- */
+@import url('utilities/animations.css');
+@import url('utilities/responsive.css');
+
+/* -------- theme toggle button -------- */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+.theme-toggle {
+  position: relative;
+  z-index: 100;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--toggle-bg);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+}
+
+.theme-toggle.is-switching {
+  transform: rotate(180deg) scale(0.92);
+}
+
+.theme-toggle:hover {
+  background: var(--toggle-bg-hover);
+  border-color: var(--volt);
+  transform: scale(1.08);
+}
+
+.theme-toggle svg {
+  width: 20px;
+  height: 20px;
+  fill: var(--toggle-icon);
+  position: absolute;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Show/hide icons based on theme */
+[data-theme="dark"] .theme-toggle .sun {
+  opacity: 0;
+  transform: rotate(90deg) scale(0.5);
+}
+
+[data-theme="dark"] .theme-toggle .moon {
+  opacity: 1;
+  transform: rotate(0) scale(1);
+}
+
+[data-theme="light"] .theme-toggle .moon {
+  opacity: 0;
+  transform: rotate(-90deg) scale(0.5);
+}
+
+[data-theme="light"] .theme-toggle .sun {
+  opacity: 1;
+  transform: rotate(0) scale(1);
+}
+
+/* ==========================================================================
+   Component: Archive Lightbox
+   Fixed #lightbox markup in index.html; js/main.js toggles it with the
+   `hidden` attribute and swaps #lightboxFrame / #lightboxImg depending on
+   whether the clicked archive card is a video or an image.
+   ========================================================================== */
+
+.video-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.92);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  animation: fadeIn 0.3s ease;
+}
+
+.video-lightbox[hidden] {
+  display: none;
+}
+
+.video-lightbox-inner {
+  position: relative;
+  width: 100%;
+  max-width: 960px;
+  aspect-ratio: 16/9;
+  background: #000;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 40px 80px rgba(0,0,0,0.5);
+}
+
+.video-lightbox-inner iframe,
+.video-lightbox-inner video {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+/* Only one of #lightboxFrame / #lightboxImg is shown at a time, based on
+   whether the .is-image class is present (set by js/main.js). */
+#lightboxImg {
+  display: none;
+}
+
+.video-lightbox.is-image #lightboxFrame {
+  display: none;
+}
+
+.video-lightbox.is-image #lightboxImg {
+  display: block;
+}
+
+/* Images size to themselves rather than being letterboxed into 16:9. */
+.video-lightbox.is-image .video-lightbox-inner {
+  width: auto;
+  aspect-ratio: auto;
+  background: transparent;
+  box-shadow: none;
+  border-radius: 0;
+  overflow: visible;
+}
+
+.video-lightbox.is-image img {
+  max-width: 100%;
+  max-height: 84vh;
+  width: auto;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: -48px;
+  right: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.3);
+  background: rgba(0,0,0,0.5);
+  color: #fff;
+  font-size: 24px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease;
+}
+
+.lightbox-close:hover {
+  background: rgba(255,255,255,0.15);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}

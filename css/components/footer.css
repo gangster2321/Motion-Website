@@ -1,0 +1,18 @@
+/* ==========================================================================
+   Component: Footer
+   Simple two-column footer: name/role and location.
+   ========================================================================== */
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40px 0;
+  border-top: 1px solid var(--line);
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--text-footer);
+  letter-spacing: .05em;
+  line-height: 1.5;
+  gap: 16px;
+}

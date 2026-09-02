@@ -1,0 +1,68 @@
+/* ==========================================================================
+   Component: Cursor Effects
+   UpSunday-style cursor: small solid dot + outer ring that follows with
+   smooth lag. On hover over interactive elements, the ring expands.
+   ========================================================================== */
+
+/* Hide default cursor on desktop */
+@media (pointer: fine) {
+  * {
+    cursor: none !important;
+  }
+
+}
+
+/* -------- inner dot (follows mouse exactly) -------- */
+.cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ffffff;
+  pointer-events: none;
+  z-index: 100001;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: difference;
+  transition: width 0.32s ease, height 0.32s ease, background 0.32s ease;
+  will-change: transform;
+}
+
+/* -------- outer ring (follows with lag via JS) -------- */
+.cursor-ring {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--cursor-ring);
+  pointer-events: none;
+  z-index: 100000;
+  transform: translate(-50%, -50%);
+  transition: width 0.42s ease, height 0.42s ease, border-color 0.42s ease, background 0.42s ease;
+  will-change: transform;
+}
+
+/* Hover state — ring expands */
+.cursor-ring.hover {
+  width: 60px;
+  height: 60px;
+  border-color: var(--cursor-ring-hover);
+  background: var(--cursor-ring-fill);
+}
+
+/* Click state — dot shrinks briefly */
+.cursor-dot.click {
+  width: 4px;
+  height: 4px;
+}
+
+/* Hide on touch devices */
+@media (pointer: coarse) {
+  .cursor-dot,
+  .cursor-ring {
+    display: none !important;
+  }
+}

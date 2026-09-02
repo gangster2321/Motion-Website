@@ -1,0 +1,378 @@
+/* ==========================================================================
+   Component: Loading Screen
+   Kinetic preloader with morphing text, spinning pill, and progress bar.
+   ========================================================================== */
+
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: var(--bg-solid);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body.is-loading { overflow: hidden; height: 100vh; }
+
+.loader.done {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loader.done .loader-inner {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s,
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s;
+}
+
+.loader-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 64px;
+  width: 100%;
+  max-width: 520px;
+  padding: 0 40px;
+}
+
+.loader-kicker {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--mono);
+  font-size: 9px;
+  letter-spacing: .14em;
+  color: var(--muted);
+  opacity: 0;
+  animation: loader-fade-up .7s cubic-bezier(.16, 1, .3, 1) forwards;
+}
+
+.loader-visual {
+  position: relative;
+  width: 116px;
+  height: 116px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  animation: loader-visual-in 1s cubic-bezier(.16, 1, .3, 1) .15s forwards;
+}
+
+.loader-visual-ring {
+  position: absolute;
+  inset: 12px;
+  border: 1px dashed var(--text-eyebrow-dash);
+  border-radius: 50%;
+  animation: loader-spin 12s linear infinite;
+}
+
+.loader-visual-play {
+  width: 0;
+  height: 0;
+  border-top: 11px solid transparent;
+  border-bottom: 11px solid transparent;
+  border-left: 17px solid var(--volt);
+  margin-left: 5px;
+  filter: drop-shadow(0 0 12px var(--volt-wash));
+}
+
+.loader-visual-line {
+  position: absolute;
+  width: 8px;
+  height: 1px;
+  background: var(--volt);
+  transform-origin: 58px 0;
+}
+
+.loader-visual-line-a { transform: rotate(24deg) translateX(58px); }
+.loader-visual-line-b { transform: rotate(204deg) translateX(58px); opacity: .45; }
+
+/* Clean central mark: hide the external orbit ticks. */
+.loader-visual-line { display: none; }
+
+@keyframes loader-visual-in {
+  from { opacity: 0; transform: scale(.75) rotate(-12deg); }
+  to { opacity: 1; transform: scale(1) rotate(0); }
+}
+
+/* -------- Main text row -------- */
+.loader-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  font-family: var(--display);
+  font-size: clamp(1.6rem, 4.5vw, 2.8rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  color: var(--text-body);
+  line-height: 1;
+}
+
+.loader-word {
+  opacity: 0;
+  transform: translateY(16px);
+  animation: loader-fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* -------- Spinning pill -------- */
+.loader-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: clamp(44px, 7vw, 64px);
+  height: clamp(26px, 4vw, 38px);
+  background: var(--tape);
+  border-radius: 999px;
+  opacity: 0;
+  transform: scale(0.7);
+  animation: loader-pill-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+}
+
+.loader-spin {
+  width: 16px;
+  height: 16px;
+  color: var(--tape-ink);
+  animation: loader-spin 1s linear infinite;
+}
+
+@keyframes loader-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* -------- Morphing word -------- */
+.loader-morph {
+  position: relative;
+  display: inline-block;
+  min-width: clamp(140px, 28vw, 280px);
+  text-align: left;
+  opacity: 0;
+  transform: translateY(16px);
+  animation: loader-fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.4s forwards;
+}
+
+.morph-word {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  white-space: nowrap;
+}
+
+.morph-word.active {
+  position: relative;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Keep last word visible during exit */
+.loader.done .morph-word {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+  transition: none !important;
+}
+
+/* -------- Progress bar -------- */
+.loader-progress-wrap {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  opacity: 0;
+  animation: loader-fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.6s forwards;
+}
+
+.loader-progress-track {
+  width: 100%;
+  height: 2px;
+  background: var(--line);
+  border-radius: 1px;
+  overflow: hidden;
+  position: relative;
+}
+
+.loader-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--volt);
+  border-radius: 1px;
+  transition: width 0.15s linear;
+}
+
+.loader-percent {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+
+.loader-note { display:inline-flex; align-items:center; gap:8px; margin-top:-42px; font-family:var(--mono); font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); opacity:0; animation:loader-fade-up .7s cubic-bezier(.16,1,.3,1) .8s forwards; }
+.loader-note-dot { width:6px; height:6px; border-radius:50%; background:var(--volt); box-shadow:0 0 0 4px var(--volt-wash); animation:loader-pulse 1.4s ease-in-out infinite; }
+@keyframes loader-pulse { 50% { transform:scale(.7); opacity:.55; } }
+
+/* -------- Keyframes -------- */
+@keyframes loader-fade-up {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes loader-pill-in {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* The pill is lime tape with near-black ink in both themes, so it needs no
+   per-theme overrides. The progress fill uses --volt, which deepens to moss
+   in light mode so a 2px bar stays visible on paper. */
+
+/* ===== Editorial loader redesign ===== */
+.loader {
+  overflow: hidden;
+  background: linear-gradient(rgba(22,21,15,.055) 1px, transparent 1px), linear-gradient(90deg, rgba(22,21,15,.055) 1px, transparent 1px), var(--bg-solid);
+  background-size: 64px 64px;
+}
+.loader::before {
+  content: 'CP';
+  position: absolute;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -55%);
+  font-family: var(--display);
+  font-size: min(46vw, 38rem);
+  line-height: .8;
+  letter-spacing: -.12em;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(22,21,15,.07);
+  pointer-events: none;
+}
+.loader::after {
+  content: '01 / 01   —   PORTFOLIO INTRO';
+  position: absolute; right: 42px; bottom: 30px;
+  font-family: var(--mono); font-size: 9px; letter-spacing: .14em;
+  color: var(--muted); opacity: .7;
+}
+.loader-inner { position: relative; z-index: 1; height: 100%; max-width: 1120px; align-items: center; justify-content: center; gap: 22px; padding: 42px 52px 58px; }
+.loader-kicker { width: 100%; justify-content: center; gap: 40px; padding-bottom: 18px; border-bottom: 1px solid rgba(22,21,15,.16); }
+.loader-visual { width: 132px; height: 132px; margin: auto; }
+.loader-visual { display: none; }
+.loader-visual::before, .loader-visual::after { content: ''; position: absolute; background: var(--volt); }
+.loader-visual::before { width: 1px; height: 18px; top: -26px; left: 50%; }
+.loader-visual::after { width: 18px; height: 1px; right: -26px; top: 50%; }
+
+/* Keep the loader mark clean: no external crosshair ticks. */
+.loader-visual::before,
+.loader-visual::after { display: none; }
+.loader-text { align-self: center; margin: 0; font-size: clamp(2rem, 5vw, 3.8rem); letter-spacing: -.04em; }
+.loader-pill { background: var(--volt); }
+.loader-spin { color: #fff; }
+[data-theme="dark"] .loader-audio-actions button:first-child {
+  background-color: #000 !important;
+}
+
+[data-theme="dark"] .loader-pill {
+  background-color: #d5fd3f !important;
+}
+
+[data-theme="dark"] .loader-pill .loader-spin {
+  color: #000;
+}
+.loader-progress-wrap { max-width: 520px; align-self: center; gap: 12px; }
+.loader-progress-track { height: 3px; background: rgba(22,21,15,.14); }
+.loader-percent { font-size: 10px; color: var(--text-body); }
+.loader-note { margin-top: 0; align-self: center; }
+.loader-note span:last-child { transition: opacity .14s ease, transform .14s ease; }
+.loader-note span:last-child.is-changing { opacity: 0; transform: translateY(4px); }
+@media (max-width: 600px) {
+  .loader-inner { padding: 28px 22px 52px; }
+  .loader::after { right: 22px; bottom: 20px; font-size: 8px; }
+  .loader-visual { width: 104px; height: 104px; }
+  .loader-text { gap: 10px; font-size: clamp(1.55rem, 8vw, 2.4rem); }
+  .loader-morph { min-width: 0; }
+  .loader-kicker { font-size: 8px; }
+  .loader-audio-actions { flex-direction: column; width: min(100%, 260px); }
+  .loader-audio-actions button { width: 100%; }
+  .loader-text {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: center;
+    width: 100%;
+    line-height: 1;
+  }
+  .loader-morph {
+    grid-column: 1 / -1;
+    width: 100%;
+    min-width: 0;
+    text-align: center;
+  }
+  .loader-morph .morph-word { width: 100%; white-space: normal; }
+  .loader-pill { width: 58px; height: 34px; }
+  .loader-pill .loader-spin { width: 17px; height: 17px; }
+}
+
+/* Reference-style centered transfer state, using this portfolio's theme. */
+.loader::before { content: none; }
+.loader-inner { max-width: 900px; padding: 42px 52px 62px; }
+.loader-visual { width: 108px; height: 108px; }
+.loader-text { margin-top: auto; margin-bottom: 18px; }
+.loader-note {
+  order: 4;
+  margin: 0 0 16px;
+  font-size: 11px;
+  letter-spacing: .08em;
+  color: var(--text-body);
+}
+.loader-progress-wrap { order: 5; width: min(100%, 540px); }
+.loader-percent { font-size: 11px; letter-spacing: .16em; }
+.loader-copy { order: 6; max-width: 520px; margin: 12px auto 0; text-align: center; font-size: .85rem; line-height: 1.5; color: var(--muted); }
+.loader-audio-gate { order: 7; display: grid; gap: 12px; justify-items: center; margin-top: 18px; opacity: 0; animation: loader-fade-up .7s ease 1.2s forwards; }
+.loader-audio-label { font-family: var(--mono); font-size: 9px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.loader-audio-actions { display: flex; gap: 8px; }
+.loader-audio-actions button { border: 1px solid var(--color-focus-ring); background: transparent; color: var(--text-body); border-radius: 999px; padding: 8px 14px; font: 10px var(--mono); letter-spacing: .04em; cursor: pointer; transition: background .2s, color .2s; }
+.loader-audio-actions button:first-child { background: var(--volt); color: #fff; }
+.loader-audio-actions button:hover { background: var(--volt); color: #fff; }
+.loader-orientation { display: none; }
+@media (max-width: 600px) and (orientation: landscape) {
+  .loader-inner > *:not(.loader-kicker):not(.loader-orientation) { display: none; }
+  .loader-orientation { display: block; order: 4; font: 12px var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--text-body); text-align: center; }
+}
+
+/* Final alignment override: keep the complete loader stack centered. */
+.loader-inner {
+  justify-content: center;
+  align-items: center;
+  gap: 22px;
+}
+
+.loader-text {
+  margin: 0;
+  align-self: center;
+}
+
+.loader-kicker,
+.loader-note,
+.loader-copy,
+.loader-progress-wrap,
+.loader-audio-gate {
+  align-self: center;
+}
+
+@media (max-width: 600px) {
+  .loader-inner { gap: 16px; padding: 28px 20px 42px; }
+  .loader-text { width: 100%; justify-content: center; font-size: clamp(1.45rem, 8vw, 2.25rem); }
+  .loader-text .loader-word { white-space: nowrap; }
+  .loader-pill { width: clamp(52px, 18vw, 68px); height: clamp(30px, 10vw, 38px); flex-shrink: 0; }
+  .loader-progress-wrap { width: min(100%, 320px); }
+  .loader-kicker { gap: 18px; font-size: 8px; }
+  .loader-copy { max-width: 300px; font-size: .78rem; }
+  .loader-audio-label { max-width: 280px; text-align: center; line-height: 1.4; }
+}

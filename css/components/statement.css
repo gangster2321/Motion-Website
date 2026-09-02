@@ -1,0 +1,90 @@
+/* ==========================================================================
+   Component: Statement
+   The philosophy paragraph that sits between the tools bar and Selected Work.
+
+   It is a plain paragraph on purpose. An earlier version had JavaScript split
+   the copy into fixed six-word blocks and wrap each one in a masked <span> to
+   animate them line by line. That approach had to re-emit the paragraph as
+   markup, which silently deleted the <span class="hl"> emphasis in the source,
+   and because each block was display:block the copy stacked into seven short
+   lines instead of wrapping into three. Both the split and the mask elements
+   are gone; wrapping is the browser's job and the scroll-in comes from the
+   shared `.reveal` transition.
+   ========================================================================== */
+
+.statement {
+  font-family: var(--display);
+  font-size: clamp(1.15rem, 2.4vw, 1.7rem);
+  line-height: 1.55;
+  letter-spacing: -0.01em;
+  color: var(--text-body);
+  text-align: left;
+
+  /* The measure is what holds the paragraph to three lines.
+
+     The copy is ~210 characters. Greedy wrapping puts it on three lines for
+     any measure between about 75 and 105 characters — below that it spills to
+     four, above it collapses to two. 78ch sits in the middle of that window:
+     1ch is the width of "0", which in a serif face is wider than an average
+     letter, so 78ch renders roughly 78-100 characters depending on the exact
+     font metrics. That keeps three lines with room to spare either way.
+
+     Using `ch` rather than px means the measure scales with the font size, so
+     the three-line wrap survives every desktop breakpoint instead of holding
+     at only one window width. The px cap keeps the line from growing past a
+     comfortable reading length on very wide screens. */
+  max-width: min(78ch, 1100px);
+  margin: 0 auto;
+}
+
+/* Emphasised phrases in the copy.
+   The reference sets the whole paragraph in one weight, so these currently
+   read the same as the surrounding text. To bring the accent back, swap the
+   declarations below for:
+       color: var(--text-statement-highlight);
+       font-style: italic;
+   The <span class="hl"> markup stays in index.html either way. */
+.statement .hl {
+  color: inherit;
+  font-style: inherit;
+  font-weight: inherit;
+}
+
+/* A softer editorial entrance than the standard section reveal. */
+.statement.in {
+  animation: statement-reveal 1.15s cubic-bezier(.16, 1, .3, 1) both;
+}
+
+/* Text-masking style reveal: each natural line rises together, preserving the
+   paragraph's responsive wrapping. */
+.statement .mask-word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(115%);
+  will-change: transform, opacity;
+}
+
+.statement.in .mask-word {
+  animation: statement-line-in .9s cubic-bezier(.16, 1, .3, 1) forwards;
+  animation-delay: calc(var(--line-index, 0) * 150ms + 120ms);
+}
+
+@keyframes statement-line-in {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes statement-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+    filter: blur(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}

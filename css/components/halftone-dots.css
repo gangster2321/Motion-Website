@@ -1,0 +1,88 @@
+/* ==========================================================================
+   Component: Halftone Dot Frame
+   Inspired by cipher.tv — structured dot-matrix border that frames
+   the viewport. Replaces the random grain overlay with an ordered,
+   editorial halftone pattern.
+   ========================================================================== */
+
+.halftone-frame {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 200;
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+
+.halftone-frame.active {
+  opacity: 1;
+}
+
+/* The dot pattern */
+.halftone-frame::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(
+    circle at center,
+    var(--dot) 0.8px,
+    transparent 0.8px
+  );
+  background-size: 20px 20px;
+  /* Fade out the center, keep dots only at edges */
+  mask-image: 
+    linear-gradient(to bottom, 
+      black 0%, 
+      black 72px, 
+      transparent 120px, 
+      transparent calc(100% - 120px), 
+      black calc(100% - 72px), 
+      black 100%
+    ),
+    linear-gradient(to right, 
+      black 0%, 
+      black 72px, 
+      transparent 120px, 
+      transparent calc(100% - 120px), 
+      black calc(100% - 72px), 
+      black 100%
+    );
+  mask-composite: intersect;
+  -webkit-mask-composite: source-in;
+}
+
+/* Corner accent dots — denser clusters at corners */
+.halftone-frame::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: 
+    /* Top-left corner cluster */
+    radial-gradient(circle at 32px 32px, var(--dot-strong) 1.5px, transparent 1.5px),
+    radial-gradient(circle at 52px 32px, var(--dot) 1px, transparent 1px),
+    radial-gradient(circle at 32px 52px, var(--dot) 1px, transparent 1px),
+    radial-gradient(circle at 52px 52px, var(--dot-faint) 0.8px, transparent 0.8px),
+    /* Top-right corner cluster */
+    radial-gradient(circle at calc(100% - 32px) 32px, var(--dot-strong) 1.5px, transparent 1.5px),
+    radial-gradient(circle at calc(100% - 52px) 32px, var(--dot) 1px, transparent 1px),
+    radial-gradient(circle at calc(100% - 32px) 52px, var(--dot) 1px, transparent 1px),
+    radial-gradient(circle at calc(100% - 52px) 52px, var(--dot-faint) 0.8px, transparent 0.8px),
+    /* Bottom-left corner cluster */
+    radial-gradient(circle at 32px calc(100% - 32px), var(--dot-strong) 1.5px, transparent 1.5px),
+    radial-gradient(circle at 52px calc(100% - 32px), var(--dot) 1px, transparent 1px),
+    radial-gradient(circle at 32px calc(100% - 52px), var(--dot) 1px, transparent 1px),
+    radial-gradient(circle at 52px calc(100% - 52px), var(--dot-faint) 0.8px, transparent 0.8px),
+    /* Bottom-right corner cluster */
+    radial-gradient(circle at calc(100% - 32px) calc(100% - 32px), var(--dot-strong) 1.5px, transparent 1.5px),
+    radial-gradient(circle at calc(100% - 52px) calc(100% - 32px), var(--dot) 1px, transparent 1px),
+    radial-gradient(circle at calc(100% - 32px) calc(100% - 52px), var(--dot) 1px, transparent 1px),
+    radial-gradient(circle at calc(100% - 52px) calc(100% - 52px), var(--dot-faint) 0.8px, transparent 0.8px);
+  opacity: 0.6;
+}
+
+/* Hide on touch devices for performance */
+@media (pointer: coarse) {
+  .halftone-frame {
+    display: none;
+  }
+}

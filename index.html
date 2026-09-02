@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>Chandra Prakash — Motion Designer &amp; Video Editor</title>
+  <meta name="description" content="Portfolio of Chandra Prakash — Motion Designer & Video Editor with 5+ years of experience in SaaS demos, explainer videos, and social content.">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Chandra Prakash — Motion Designer & Video Editor">
+  <meta property="og:description" content="5+ years turning scripts and product features into finished motion. SaaS demos, explainer videos, and social content.">
+  <meta property="og:image" content="https://yourdomain.com/og-image.jpg">
+  <meta property="twitter:card" content="summary_large_image">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🎬%3C/text%3E%3C/svg%3E">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+  <!-- Loading Screen -->
+  <div class="loader" id="loader">
+    <div class="loader-inner">
+      <div class="loader-kicker"><span>CP / 2026</span><span>MOTION DESIGNER</span></div>
+      <div class="loader-visual" aria-hidden="true">
+        <span class="loader-visual-ring"></span>
+        <span class="loader-visual-play"></span>
+        <span class="loader-visual-line loader-visual-line-a"></span>
+        <span class="loader-visual-line loader-visual-line-b"></span>
+      </div>
+      <div class="loader-text">
+        <span class="loader-word">Loading</span>
+        <span class="loader-pill">
+          <svg class="loader-spin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="12" cy="12" r="9" stroke-dasharray="42" stroke-dashoffset="14"/>
+          </svg>
+        </span>
+        <span class="loader-morph" id="loaderMorph">
+          <span class="morph-word">Chandra Prakash</span>
+          <span class="morph-word">Chandra Prakash</span>
+        </span>
+      </div>
+      <div class="loader-progress-wrap">
+        <div class="loader-progress-track">
+          <div class="loader-progress-fill" id="loaderProgress"></div>
+        </div>
+        <div class="loader-percent" id="loaderPercent">0%</div>
+      </div>
+      <div class="loader-note"><span class="loader-note-dot"></span><span id="loaderNoteText">Preparing your reel</span></div>
+      <p class="loader-copy">Motion design, video editing, SaaS demos, and stories built to be watched.</p>
+      <div class="loader-orientation">Please rotate your device for the full experience.</div>
+    </div>
+  </div>
+
+
+
+  <!-- Page Wipe Transition Overlay -->
+  <div class="page-wipe" id="pageWipe"></div>
+
+  <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <div class="nav maxw">
+    <span class="nav-name">CHANDRA PRAKASH</span>
+    <nav class="nav-links">
+      <a class="nav-link" href="#work">Work</a>
+      <a class="nav-link" href="#services">Services</a>
+      <a class="nav-link" href="#experience">Experience</a>
+      <a class="nav-link" href="#contact">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <a class="nav-pill" href="mailto:chandrap858@gmail.com" data-hover>AVAILABLE FOR WORK</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z"/></svg>
+        <svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12zm0-2a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM11 1h2v3h-2V1zm0 19h2v3h-2v-3zM3.515 4.929l1.414-1.414L7.05 5.636 5.636 7.05 3.515 4.93zM16.95 18.364l1.414-1.414 2.121 2.121-1.414 1.414-2.121-2.121zm2.121-14.85l1.414 1.415-2.121 2.121-1.414-1.414 2.121-2.122zM5.636 16.95l1.414 1.414-2.121 2.121-1.414-1.414 2.121-2.121zM23 11v2h-3v-2h3zM4 11v2H1v-2h3z"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="hero" id="hero">
+    <!-- Name & Designation -->
+    <div class="hero-identity">
+      <h1 class="hero-name">Chandra Prakash</h1>
+      <div class="hero-ticker-wrapper">
+        <div class="hero-ticker-track">
+          <span class="hero-ticker-item">Motion Design</span>
+          <span class="hero-ticker-item">Video Editing</span>
+          <span class="hero-ticker-item">SaaS Demos</span>
+          <span class="hero-ticker-item">Explainer Videos</span>
+          <span class="hero-ticker-item">Social Content</span>
+          <span class="hero-ticker-item">Motion Design</span>
+          <span class="hero-ticker-item">Video Editing</span>
+          <span class="hero-ticker-item">SaaS Demos</span>
+          <span class="hero-ticker-item">Explainer Videos</span>
+          <span class="hero-ticker-item">Social Content</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-social">
+      <div class="hero-social-item">
+        <div class="hero-social-stars">
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <span>5.0 RATING</span>
+      </div>
+      <div class="hero-social-item">
+        <span>50+ PROJECTS</span>
+      </div>
+      <div class="hero-social-item">
+        <span>5+ YEARS</span>
+      </div>
+    </div>
+
+    <div class="hero-headline">
+      <span class="line">Motion design that turns product features</span>
+      <span class="line">into stories people remember.</span>
+    </div>
+
+    <p class="hero-sub">
+      I help SaaS and product teams explain what they build — through demos, explainers, and social content that actually gets watched.
+    </p>
+
+    <div class="hero-cta">
+      <a class="hero-cta-primary" href="#work">View Selected Work →</a>
+      <a class="hero-cta-secondary" href="#">Download Resume ↓</a>
+    </div>
+
+    <div class="hero-scroll">
+      <div class="hero-scroll-line"></div>
+    </div>
+  </div>
+
+  <div class="maxw toolsbar progressive-blur" aria-label="Software tools">
+    <div class="toolsbar-track">
+      <span>AFTER EFFECTS</span><span>PREMIERE PRO</span><span>CINEMA 4D</span><span>FIGMA</span><span>BLENDER</span><span>DA VINCI RESOLVE</span>
+      <span>AFTER EFFECTS</span><span>PREMIERE PRO</span><span>CINEMA 4D</span><span>FIGMA</span><span>BLENDER</span><span>DA VINCI RESOLVE</span>
+      <span>AFTER EFFECTS</span><span>PREMIERE PRO</span><span>CINEMA 4D</span><span>FIGMA</span><span>BLENDER</span><span>DA VINCI RESOLVE</span>
+    </div>
+  </div>
+
+  <section class="maxw" id="statement">
+    <p class="statement reveal" id="statementText">
+      Motion is the most honest form of storytelling. <span class="hl">Every frame is a decision</span> — what to show, what to hide, and how long to hold the silence. I turn complex SaaS features into <span class="hl">stories people actually want to watch.</span>
+    </p>
+  </section>
+
+  <section class="maxw" id="work">
+    <div class="eyebrow reveal">Selected Work</div>
+
+    <div class="work-item reveal">
+      <div class="work-visual">
+        <div class="video-frame">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/adzlmfj7Dsc?si=pLVTMT3jLI4XZYJk" title="eShopSync for WooCommerce and Salesforce" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+      </div>
+      <div class="work-detail">
+        <div class="work-meta">
+          <span class="work-num">01</span>
+        </div>
+        <h3 class="work-title">eShopSync for WooCommerce and Salesforce</h3>
+        <p class="work-desc">eShopSync connects WooCommerce with Salesforce CRM for real-time syncing of orders, customers, and products. Streamline operations, personalize marketing, and scale faster with confidence.</p>
+        <div class="work-tags"><span>Product Integration</span></div>
+      </div>
+    </div>
+
+    <div class="work-item reveal">
+      <div class="work-visual">
+        <div class="video-frame">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/wiZ9I7qWaUE?si=I5G9fSOsrSq3IYAT" title="Krayin White Label CRM: Simplify Your Business" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+      </div>
+      <div class="work-detail">
+        <div class="work-meta">
+          <span class="work-num">02</span>
+        </div>
+        <h3 class="work-title">Krayin White Label CRM: Simplify Your Business</h3>
+        <p class="work-desc">Krayin White Label CRM lets teams customize branding, logos, menus, colors, and footer details directly from the admin panel—without technical skills. Create a personalized CRM experience that fits your business.</p>
+        <div class="work-tags"><span>CRM Customization</span><span>Admin Panel</span></div>
+      </div>
+    </div>
+
+    <div class="work-item reveal">
+      <div class="work-visual">
+        <div class="video-frame">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/GJFKbqs04P4?si=lgNLQVniFvZ26gML" title="How eShopSync Salesforce B2C Bridge syncs Commerce Cloud with Shopify Seamlessly" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+      </div>
+      <div class="work-detail">
+        <div class="work-meta">
+          <span class="work-num">03</span>
+        </div>
+        <h3 class="work-title">How eShopSync Salesforce B2C Bridge syncs Commerce Cloud with Shopify Seamlessly</h3>
+        <p class="work-desc">Discover how eShopSync Salesforce B2C Bridge seamlessly syncs Commerce Cloud data with Shopify. See how it improves accuracy, streamlines migration, and saves valuable time.</p>
+        <div class="work-tags"><span>eCommerce Integration</span></div>
+      </div>
+    </div>
+
+    <div class="work-item reveal">
+      <div class="work-visual">
+        <div class="video-frame">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/uKxR7ty5ZrA?si=FhY8ic-NYIYdoJoF" title="Odoo Native App HRMS" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+      </div>
+      <div class="work-detail">
+        <div class="work-meta">
+          <span class="work-num">04</span>
+        </div>
+        <h3 class="work-title">Odoo Native App HRMS</h3>
+        <p class="work-desc">Odoo Native App HRMS brings employee management, attendance, leave, payroll, and recruitment to mobile. Manage essential HR operations in real time, anytime and anywhere.</p>
+        <div class="work-tags"><span>HR Technology</span></div>
+      </div>
+    </div>
+  </section>
+  <!-- Projects Archive Section -->
+  <section class="maxw" id="projects">
+    <div class="eyebrow reveal">Project Archive</div>
+    <!-- Video and image cards are generated from js/projects-data.js.
+         Edit that file to change the archive. -->
+    <div id="videoGrid" class="reveal"></div>
+    <div id="imageGrid" class="reveal"></div>
+
+    <div class="projects-more-wrap reveal">
+      <a class="projects-more-btn" id="viewMoreBtn" href="https://yourdomain.com/projects">View More <span aria-hidden="true">→</span></a>
+    </div>
+  </section>
+
+  <!-- Archive Lightbox -->
+  <div class="video-lightbox" id="lightbox" hidden>
+    <div class="video-lightbox-inner">
+      <iframe id="lightboxFrame" title="Project preview" frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <img id="lightboxImg" alt="">
+      <button type="button" class="lightbox-close" id="lightboxClose" aria-label="Close preview">&times;</button>
+    </div>
+  </div>
+
+
+  <section class="maxw" id="services">
+    <div class="eyebrow reveal">What I Do</div>
+    <div class="svc-grid reveal">
+      <div class="svc-card">
+        <span class="svc-num">01</span>
+        <h3>Motion Design</h3>
+        <p>From UI micro-interactions to full product demos — I design motion that clarifies and captivates.</p>
+      </div>
+      <div class="svc-card">
+        <span class="svc-num">02</span>
+        <h3>Video Editing</h3>
+        <p>Premiere Pro and DaVinci Resolve. Cinematic pacing, clean cuts, and color grading that holds attention.</p>
+      </div>
+      <div class="svc-card">
+        <span class="svc-num">03</span>
+        <h3>3D Animation</h3>
+        <p>Cinema 4D and Blender. Product visualizations, abstract loops, and environment builds for brand worlds.</p>
+      </div>
+      <div class="svc-card">
+        <span class="svc-num">04</span>
+        <h3>Social Content</h3>
+        <p>Platform-native formats — Reels, TikTok, LinkedIn — designed for thumb-stopping first impressions.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="maxw" id="experience">
+    <div class="eyebrow reveal">Experience</div>
+    <div class="timeline reveal">
+      <div class="clip">
+        <div class="keyframe"></div>
+        <div class="clip-range">2024 — PRESENT</div>
+        <h3 class="clip-title">Motion Designer & Video Editor</h3>
+        <p class="clip-org">Webkul Software</p>
+        <ul>
+          <li>Edit and produce SaaS product demos, tutorials, and explainer videos for software features and workflows</li>
+          <li>Create motion graphics, UI animations, and marketing videos for product campaigns and social media, supporting campaigns viewed by 10,000+ users</li>
+          <li>Collaborate with creative and product teams on visual concepts, storyboards, animation, editing, and final delivery</li>
+        </ul>
+      </div>
+      <div class="clip">
+        <div class="keyframe"></div>
+        <div class="clip-range">2022 — 2024</div>
+        <h3 class="clip-title">Motion Graphic Artist</h3>
+        <p class="clip-org">Fotografik</p>
+        <ul>
+          <li>Designed and animated UI elements and motion graphics for digital and branded video content across 30+ projects</li>
+          <li>Created particle and liquid animation sequences for visual effects used in 15+ client deliverables</li>
+          <li>Handled rotoscoping, camera tracking, and motion tracking for video compositions</li>
+        </ul>
+      </div>
+      <div class="clip">
+        <div class="keyframe"></div>
+        <div class="clip-range">MAR 2022 — DEC 2022</div>
+        <h3 class="clip-title">Motion Designer</h3>
+        <p class="clip-org">Yes Startups</p>
+        <ul>
+          <li>Produced short-form marketing videos, Instagram Reels, showreels, and branded social content</li>
+          <li>Created explainer videos from scripts and storyboards through animation and final export, delivering 12+ videos</li>
+          <li>Designed intros and outros based on client and brand requirements for 10+ clients</li>
+        </ul>
+      </div>
+      <div class="clip">
+        <div class="keyframe"></div>
+        <div class="clip-range">FREELANCE</div>
+        <h3 class="clip-title">3D Modeler</h3>
+        <p class="clip-org">Freelance</p>
+        <ul>
+          <li>Modeled and textured low-poly assets and props using Blender and Autodesk Maya</li>
+          <li>Created 3D characters and exterior architectural models for freelance clients</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="maxw" id="education">
+    <div class="eyebrow reveal">Education</div>
+    <div class="reveal">
+      <div class="edu-row">
+        <div class="edu-name">Diploma in Animation & Visual Effects (AAIP)</div>
+        <div class="edu-org">Arena Animation</div>
+        <div class="edu-year">DEC 2021 — MAR 2022</div>
+      </div>
+      <div class="edu-row">
+        <div class="edu-name">Senior Secondary (Class 12), CBSE — Mathematics</div>
+        <div class="edu-org">CBSE Board</div>
+        <div class="edu-year">Completed</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="maxw closing" id="contact">
+    <div class="eyebrow reveal">Get in Touch</div>
+    <div class="closing-rule reveal" aria-hidden="true"></div>
+    <p class="closing-message reveal">Have a product, idea, or story that deserves to be watched?</p>
+    <p class="closing-sub reveal">Let’s turn the brief into clear, memorable motion.</p>
+    <div class="closing-contact-row">
+      <a class="magnetic-btn" id="magnet" href="mailto:chandrap858@gmail.com" data-hover data-magnetic>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        chandrap858@gmail.com
+      </a>
+      <a class="closing-phone" href="tel:+919112528369" data-magnetic>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.9.33 1.78.62 2.63a2 2 0 0 1-.45 2.11L8 9.73a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.85.29 1.73.5 2.63.62A2 2 0 0 1 22 16.92z"/></svg>
+        +91 91125 28369
+      </a>
+    </div>
+  </section>
+
+  <footer class="maxw">
+    <div>© 2026 Chandra Prakash</div>
+    <div>Noida, India</div>
+  </footer>
+
+  <script src="js/projects-data.js?v=20260902-11"></script>
+  <script src="js/main.js"></script>
+</body>
+
+</html>

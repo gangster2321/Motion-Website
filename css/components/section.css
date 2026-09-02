@@ -1,0 +1,44 @@
+/* ==========================================================================
+   Component: Section Shell
+   ========================================================================== */
+
+section {
+  padding: 0 0 100px 0;
+  position: relative;
+}
+
+section:first-of-type {
+  padding-top: 60px;
+}
+
+section:not(:first-of-type) {
+  padding-top: 56px;
+}
+
+.eyebrow {
+  font-family: var(--display);
+  font-size: clamp(1.25rem, 2.8vw, 1.65rem);
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: -0.02em;
+  color: var(--volt);
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 48px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-transform: none;
+}
+
+.eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 1px;
+  border: 1.5px solid var(--volt);
+  background: var(--volt-wash);
+  flex-shrink: 0;
+  transform: rotate(45deg);
+}

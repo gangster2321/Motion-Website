@@ -1,0 +1,113 @@
+/* ==========================================================================
+   Component: Nav
+   Fixed top bar with frosted glass blur backdrop (like assistantly).
+   Name left, nav links center, CTA right.
+   ========================================================================== */
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  isolation: isolate;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  transition: transform .4s cubic-bezier(.16, 1, .3, 1);
+
+  /* Frosted glass blur backdrop */
+  background: var(--nav-bg);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid var(--nav-border);
+}
+
+.nav-name {
+  font-family: var(--mono);
+  font-size: 13px;
+  letter-spacing: .05em;
+  color: var(--text-body);
+  font-weight: 500;
+}
+
+/* Nav links (center area) */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.nav-link {
+  font-family: var(--body);
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-body);
+  text-decoration: none;
+  transition: color 0.25s ease;
+  opacity: 1;
+}
+
+.nav-link:hover {
+  color: var(--volt);
+  opacity: 1;
+  font-style: italic;
+}
+
+.nav-pill {
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: .05em;
+  color: var(--text-body);
+  border: 1px solid var(--color-nav-border);
+  border-radius: 999px;
+  padding: 8px 16px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  transition: border-color .3s ease, color .3s ease;
+}
+
+.nav-pill:hover {
+  border-color: var(--volt);
+  color: var(--volt);
+}
+
+.nav-pill::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-nav-pill-dot);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .nav {
+    height: 64px;
+    padding: 0 20px;
+  }
+
+  .nav-links {
+    display: none;
+  }
+}
+
+
+/* Nav actions group (pill + toggle) */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}

@@ -1,0 +1,52 @@
+/* ==========================================================================
+   Component: Page Wipe Transition
+   Full-screen color sweep for section transitions and video modal reveals.
+   Inspired by cipher.tv's smooth transitions.
+   ========================================================================== */
+
+.page-wipe {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  pointer-events: none;
+  transform: translateY(100%);
+  transition: none;
+}
+
+.page-wipe::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--tape);
+}
+
+.page-wipe.active {
+  animation: wipe-reveal 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  pointer-events: all;
+}
+
+.page-wipe.reverse {
+  animation: wipe-hide 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes wipe-reveal {
+  0% {
+    transform: translateY(100%);
+  }
+  50% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
+}
+
+@keyframes wipe-hide {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+

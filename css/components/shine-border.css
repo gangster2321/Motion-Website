@@ -1,0 +1,50 @@
+/* Animated Shine Border treatment for dark-theme surfaces. */
+@property --shine-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+[data-theme="dark"] .magnetic-btn,
+[data-theme="dark"] .closing-phone,
+[data-theme="dark"] .theme-toggle,
+[data-theme="dark"] .svc-card,
+[data-theme="dark"] .video-frame {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border-color: rgba(212, 255, 0, .24);
+}
+
+[data-theme="dark"] .magnetic-btn::before,
+[data-theme="dark"] .closing-phone::before,
+[data-theme="dark"] .theme-toggle::before,
+[data-theme="dark"] .svc-card::before,
+[data-theme="dark"] .video-frame::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  border-radius: inherit;
+  padding: 1px;
+  pointer-events: none;
+  background: conic-gradient(from var(--shine-angle), transparent 0deg 235deg, rgba(212, 255, 0, .9) 270deg, rgba(255, 255, 255, .95) 290deg, transparent 325deg 360deg);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  animation: shine-border-angle 8s linear infinite;
+}
+
+@keyframes shine-border-angle {
+  to { --shine-angle: 360deg; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-theme="dark"] .magnetic-btn::before,
+  [data-theme="dark"] .closing-phone::before,
+  [data-theme="dark"] .theme-toggle::before,
+  [data-theme="dark"] .svc-card::before,
+  [data-theme="dark"] .video-frame::before {
+    animation: none;
+  }
+}

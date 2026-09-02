@@ -1,0 +1,415 @@
+/* ==========================================================================
+   Component: Work Item
+   Each row in the "Selected Work" grid: the alternating layout, the
+   oversized ghost number, and the info column (index/org/title/desc).
+   The embedded video player itself lives in components/video-player.css.
+   ========================================================================== */
+
+.work-list {
+  position: relative;
+}
+
+.work-item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: center;
+  padding: 64px 0;
+  border-top: 1px solid var(--line);
+  overflow: visible;
+}
+
+.work-list .work-item:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+
+.work-list .work-item:last-child {
+  border-bottom: 1px solid var(--line);
+}
+
+.work-item:nth-child(even) {
+  direction: rtl;
+}
+
+.work-item:nth-child(even) > * {
+  direction: ltr;
+}
+
+/* -------- ghost number -------- */
+.work-ghost {
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  transform: translate(50%, -50%);
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(8rem, 15vw, 12rem);
+  color: transparent;
+  -webkit-text-stroke: 1px var(--color-ghost-stroke);
+  pointer-events: none;
+  line-height: 1;
+  user-select: none;
+  z-index: 0;
+  letter-spacing: -0.02em;
+}
+
+/* -------- info column -------- */
+.work-info {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.work-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.work-index {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-work-index);
+  letter-spacing: .08em;
+  background: var(--color-work-index-bg);
+  padding: 4px 10px;
+  border-radius: 4px;
+  border: 1px solid var(--color-work-index-border);
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+}
+
+.work-org {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-work-org);
+  letter-spacing: .06em;
+  line-height: 1;
+}
+
+.work-title {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: clamp(1.4rem, 2.6vw, 2rem);
+  margin-bottom: 12px;
+  line-height: 1.2;
+  color: var(--text-body);
+  letter-spacing: -0.01em;
+}
+
+.work-desc {
+  color: var(--text-work-desc);
+  font-size: .95rem;
+  line-height: 1.65;
+  max-width: 420px;
+  letter-spacing: 0.01em;
+}
+
+/* -------- bottom project index bar (cipher.tv inspired) -------- */
+.work-item::after {
+  content: attr(data-index);
+  position: absolute;
+  bottom: 16px;
+  left: 0;
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-work-org);
+  letter-spacing: .08em;
+  opacity: 0.5;
+}
+
+.work-item:nth-child(even)::after {
+  left: auto;
+  right: 0;
+}
+
+/* -------- markup used by index.html --------
+   The section markup uses .work-visual / .work-detail / .work-num / .work-tag
+   / .work-tags. These were previously unstyled, so the meta row rendered as
+   bare text. They share the language of .work-info / .work-index above. */
+
+.work-visual {
+  position: relative;
+  z-index: 2;
+}
+
+.work-detail {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* The index chip — accent type on an accent wash, the same treatment the
+   project-tag pills use, so the two sections read as one system. */
+.work-num {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-work-index);
+  letter-spacing: .08em;
+  background: var(--color-work-index-bg);
+  padding: 4px 10px;
+  border-radius: 4px;
+  border: 1px solid var(--color-work-index-border);
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+}
+
+.work-tag {
+  font-family: var(--mono);
+  font-size: 11px;
+  color: var(--text-work-org);
+  letter-spacing: .06em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.work-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.work-tags span {
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: .06em;
+  padding: 5px 11px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  line-height: 1;
+  transition: border-color .3s ease, color .3s ease;
+}
+
+.work-item:hover .work-tags span {
+  border-color: var(--accent-border-hover);
+  color: var(--volt);
+}
+
+/* ==========================================================================
+   Component: Archive (Video + Image Grids)
+   Plain thumbnail grids for #videoGrid / #imageGrid in index.html — no
+   titles, tags, or company names, just a clickable poster + play button
+   for videos. Rendered by the "Archive (Video + Image Sections)" block in
+   js/main.js from js/projects-data.js.
+   ========================================================================== */
+
+#videoGrid,
+#imageGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-bottom: 24px;
+  align-items: stretch;
+}
+
+#videoGrid {
+  margin-bottom: 48px;
+}
+
+.projects-more-wrap { display: flex; justify-content: center; margin: 16px 0 8px; }
+
+.project-card {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--surface-card);
+  border: 1px solid var(--line-card);
+  box-shadow: var(--shadow-lift);
+  height: 100%;
+  transition: transform 0.45s ease, box-shadow 0.45s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 34px rgba(0,0,0,.18);
+}
+
+/* Cards past the initial reveal count, until "View More" is clicked. */
+.project-card.hidden-card {
+  display: none;
+}
+
+.project-thumb {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  display: block;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.project-thumb img,
+.project-thumb video {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform 0.7s ease;
+}
+
+/* Image archive cards use square placeholders; video cards remain 16:9. */
+#imageGrid .project-thumb,
+#imageGrid .project-thumb img,
+#imageGrid .project-thumb video {
+  aspect-ratio: 1 / 1;
+}
+
+/* Keep YouTube artwork at its natural 16:9 scale so the full thumbnail stays
+   visible inside the archive placeholder. */
+.project-thumb img[src*="img.youtube.com"] {
+  transform: scale(1.06);
+}
+
+.project-card:hover .project-thumb img,
+.project-card:hover .project-thumb video {
+  transform: scale(1.05);
+}
+
+/* Shown when a project has no thumbnail to fall back on. */
+.project-thumb-fallback {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--tape);
+  color: var(--tape-ink);
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 2.4rem;
+  line-height: 1;
+}
+
+/* Play overlay for videos */
+.play-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 10, 10, 0.3);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.project-card:hover .play-overlay {
+  opacity: 1;
+}
+
+.play-overlay svg {
+  width: 56px;
+  height: 56px;
+  fill: var(--tape);
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4));
+}
+
+/* View More button */
+.projects-more-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-family: var(--body);
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  color: var(--tape-ink);
+  background: var(--tape);
+  padding: 14px 36px;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  box-shadow: var(--shadow-cta);
+  border: none;
+  cursor: pointer;
+}
+
+.projects-more-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-cta-hover);
+}
+
+.projects-more-btn span { font-size: 1.1em; transition: transform .25s ease; }
+.projects-more-btn:hover span { transform: translateX(3px); }
+
+/* Responsive */
+@media (max-width: 1024px) {
+  #videoGrid,
+  #imageGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  #videoGrid,
+  #imageGrid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+}
+
+/* Interactive archive cards: stable grid with a restrained 3D response. */
+@media (min-width: 901px) {
+  #projects { overflow: visible; }
+}
+
+.project-card {
+  --tilt-x: 0deg;
+  --tilt-y: 0deg;
+  --spot-x: 50%;
+  --spot-y: 50%;
+  --image-x: 0px;
+  --image-y: 0px;
+  transform: translateY(0) rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.project-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle at var(--spot-x) var(--spot-y), rgba(255,255,255,.18), transparent 42%);
+  opacity: 0;
+  transition: opacity .38s ease;
+}
+
+.project-card:hover::after { opacity: 1; }
+.project-card:hover { transform: translateY(-4px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y)); }
+
+/* Pointer-driven image parallax, inspired by GSAP hover galleries. */
+.project-card:hover .project-thumb img,
+.project-card:hover .project-thumb video {
+  transform: translate3d(var(--image-x), var(--image-y), 0) scale(1.06);
+}
+
+.project-card:hover .project-thumb img[src*="img.youtube.com"] {
+  transform: translate3d(var(--image-x), var(--image-y), 0) scale(1.08);
+}
+
+.reveal.in .project-card {
+  animation: archive-card-in .85s cubic-bezier(.16, 1, .3, 1) both;
+  animation-delay: calc(var(--card-index, 0) * 55ms);
+}
+
+@keyframes archive-card-in {
+  from { opacity: 0; transform: translateY(24px) scale(.97); }
+  to { opacity: 1; transform: translateY(0) scale(1) rotateX(var(--tilt-x)) rotateY(var(--tilt-y)); }
+}

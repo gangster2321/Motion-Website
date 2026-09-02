@@ -1,0 +1,254 @@
+/* ==========================================================================
+   Design Tokens
+
+   Two themes, one identity.
+
+   DARK  — the grading suite. Bone-white type on near-black, with an acid
+           lime signal that EMITS: lime type, lime hairlines, soft glows.
+
+   LIGHT — the paper edit. The roles invert literally: dark mode's ink
+           (#f3f1ea) becomes light mode's paper, and dark mode's paper
+           (#0a0a0a) becomes its ink. The lime pigment is preserved exactly,
+           but its physics change — it can no longer emit, so it is APPLIED:
+           highlighter tape and chips, always carrying near-black ink. Where
+           the accent must be type (eyebrows, ranges, index chips) it drops
+           to a deep moss of the same hue family, dark enough to be ink.
+
+   Two rules keep the themes honest:
+     1. --volt is the accent AS TYPE OR HAIRLINE. It must always be legible
+        against --bg. Never fill a large area with it.
+     2. --tape is the accent AS SURFACE. It is the same lime in both themes
+        and ALWAYS pairs with --tape-ink. Never put --ink on --tape.
+
+   Theme is set via data-theme="light" on <html>; dark is the default.
+   ========================================================================== */
+
+:root {
+  /* -------- brand constants (identical in both themes) --------
+     The lime pigment. In dark it glows, in light it is tape — but it is
+     always the same colour, and always carries near-black ink. */
+  --tape: #d4ff00;
+  --tape-ink: #0a0a0a;
+
+  /* -------- chrome that sits ON imagery --------
+     Play badges and thumbnail overlays always lie on top of a video still,
+     never on --bg, so they stay dark in both themes. Tokenised only so the
+     lime here can't drift away from --tape. */
+  --media-chrome-bg: rgba(10, 10, 10, 0.85);
+  --media-chrome-line: rgba(212, 255, 0, 0.6);
+
+  /* -------- typography -------- */
+  --display: 'Libre Baskerville', Georgia, serif;
+  --body: 'Libre Baskerville', Georgia, serif;
+  --mono: 'JetBrains Mono', monospace;
+
+  /* -------- layout -------- */
+  --maxw: 1240px;
+}
+
+/* ==========================================================================
+   DARK — the grading suite (default)
+   ========================================================================== */
+
+:root {
+  --bg: #0a0a0a;
+  --bg-solid: #0a0a0a;
+  --bg-alt: #111110;
+  --ink: #f3f1ea;
+  --muted: #87857e;
+  --line: rgba(243, 241, 234, 0.09);
+
+  /* accent as type / hairline — lime emits against near-black */
+  --volt: #d4ff00;
+  --volt-soft: rgba(212, 255, 0, 0.14);
+  --volt-fade: rgba(212, 255, 0, 0.30);
+  --volt-wash: rgba(212, 255, 0, 0.08);
+
+  /* -------- raised surfaces --------
+     Dark cards lift TOWARD the light. */
+  --surface-card: #131312;
+  --surface-card-hover: #171715;
+  --line-card: rgba(243, 241, 234, 0.07);
+
+  /* halftone dot frame — bone dots on black, three densities */
+  --dot-strong: rgba(243, 241, 234, 0.20);
+  --dot: rgba(243, 241, 234, 0.15);
+  --dot-faint: rgba(243, 241, 234, 0.10);
+
+  /* lifted 3D thumbnail cluster */
+  --shadow-float: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --accent-border-hover: rgba(215, 255, 63, 0.32);
+
+  /* -------- depth --------
+     Dark mode gets glow; light mode gets real shadow. */
+  --shadow-lift: 0 16px 40px rgba(0, 0, 0, .6);
+  --shadow-cta: 0 0 8px 0 rgba(212, 255, 0, 0.45);
+  --shadow-cta-hover: 0 0 16px 0 rgba(212, 255, 0, 0.6);
+
+  /* -------- chrome -------- */
+  --nav-bg: rgba(10, 10, 10, 0.6);
+  --nav-border: rgba(243, 241, 234, 0.06);
+  --rail-track: rgba(212, 255, 0, 0.15);
+  --rail-glow: 0 0 16px rgba(212, 255, 0, 0.6);
+  --cursor-ring: rgba(243, 241, 234, 0.5);
+  --cursor-ring-hover: rgba(243, 241, 234, 0.8);
+  --cursor-ring-fill: rgba(243, 241, 234, 0.05);
+
+  /* -------- component text colors -------- */
+  --text-body: #f3f1ea;
+  --text-marquee-secondary: #f3f1ea;
+  --text-marquee-accent: #d7ff3f;
+  --text-hero-sub: #87857e;
+  --text-scroll-cue: #87857e;
+  --text-toolsbar: #87857e;
+  --text-toolsbar-accent: #d7ff3f;
+  --text-eyebrow: #d7ff3f;
+  --text-eyebrow-dash: #87857e;
+  --text-statement-highlight: #d7ff3f;
+  --text-statement-dim: #87857e;
+  --text-work-index: #d7ff3f;
+  --text-work-org: #87857e;
+  --text-work-desc: #87857e;
+  --text-play-badge: #d7ff3f;
+  --text-svc-num: #87857e;
+  --text-svc-desc: #87857e;
+  --text-clip-range: #d7ff3f;
+  --text-clip-org: #87857e;
+  --text-clip-item: #f3f1ea;
+  --text-edu-org: #87857e;
+  --text-magnetic-btn: #f3f1ea;
+  --text-magnetic-btn-hover: #d7ff3f;
+  --text-closing-phone: #87857e;
+  --text-closing-phone-hover: #d7ff3f;
+  --text-footer: #87857e;
+
+  /* -------- decorative colors -------- */
+  --color-nav-border: #f3f1ea;
+  --color-nav-pill-dot: #d7ff3f;
+  --color-cursor-default: #d7ff3f;
+  --color-cursor-big: #f3f1ea;
+  --color-scroll-line: #87857e;
+  --color-scroll-drip: #d7ff3f;
+  --color-timeline-bullet: #87857e;
+  --color-timeline-keyframe: #d7ff3f;
+  --color-video-border-hover: #d7ff3f;
+  --color-video-glow: rgba(215, 255, 63, 0.1);
+  --color-focus-ring: #d7ff3f;
+
+  /* -------- work section specific -------- */
+  --color-ghost-stroke: rgba(243, 241, 234, 0.07);
+  --color-work-index-bg: rgba(215, 255, 63, 0.08);
+  --color-work-index-border: rgba(215, 255, 63, 0.2);
+
+  /* -------- toggle button -------- */
+  --toggle-bg: rgba(243, 241, 234, 0.08);
+  --toggle-bg-hover: rgba(243, 241, 234, 0.15);
+  --toggle-icon: #f3f1ea;
+}
+
+/* ==========================================================================
+   LIGHT — the paper edit
+
+   --bg   is dark mode's ink, now serving as paper.
+   --ink  is dark mode's paper, now serving as ink.
+   --volt is the lime dropped to a deep moss (same hue family, ~6.5:1 on
+          paper) so the accent can be read as type.
+   --tape stays the true lime, inherited from :root — never overridden.
+   ========================================================================== */
+
+[data-theme="light"] {
+  --bg: #f2f1ec;
+  --bg-solid: #f2f1ec;
+  --bg-alt: #e7e5dc;
+  --ink: #16150f;
+  --muted: #6b6659;
+  --line: rgba(22, 21, 15, 0.13);
+
+  /* Blue accent surfaces for light-theme pills and primary actions. */
+  --tape: #2b6be3;
+  --tape-ink: #ffffff;
+
+  /* accent as type / hairline — lime cannot emit on paper, so it deepens
+     to moss. Contrast on --bg is ~6.5:1. */
+  --volt: #2b6be3;
+  --volt-soft: rgba(43, 107, 227, 0.40);
+  --volt-fade: rgba(43, 107, 227, 0.30);
+  --volt-wash: rgba(43, 107, 227, 0.07);
+
+  /* Light cards lift TOWARD white, mirroring how dark cards lift to light. */
+  --surface-card: #fbfaf6;
+  --surface-card-hover: #ffffff;
+  --line-card: rgba(22, 21, 15, 0.10);
+
+  /* ink dots on paper — alphas pulled back, since dark-on-light reads
+     stronger than light-on-dark at the same opacity */
+  --dot-strong: rgba(22, 21, 15, 0.16);
+  --dot: rgba(22, 21, 15, 0.12);
+  --dot-faint: rgba(22, 21, 15, 0.08);
+
+  /* paper casts a shorter, softer shadow than a lightbox does */
+  --shadow-float: 0 8px 24px rgba(22, 21, 15, 0.12);
+  --accent-border-hover: rgba(43, 107, 227, 0.38);
+
+  /* Paper gets real shadow, and the primary CTA gets a hard offset edge —
+     ink pressed into stock rather than light bleeding off a screen. */
+  --shadow-lift: 0 12px 28px rgba(22, 21, 15, 0.13);
+  --shadow-cta: 0 2px 0 0 rgba(22, 21, 15, 0.85);
+  --shadow-cta-hover: 0 4px 0 0 rgba(22, 21, 15, 0.85);
+
+  --nav-bg: rgba(242, 241, 236, 0.72);
+  --nav-border: rgba(22, 21, 15, 0.08);
+  /* A glow reads as haze on paper, so the scroll dot gets a crisp ring. */
+  --rail-track: rgba(22, 21, 15, 0.10);
+  --rail-glow: 0 0 0 3px rgba(43, 107, 227, 0.14);
+  --cursor-ring: rgba(22, 21, 15, 0.45);
+  --cursor-ring-hover: rgba(22, 21, 15, 0.75);
+  --cursor-ring-fill: rgba(22, 21, 15, 0.04);
+
+  --text-body: #16150f;
+  --text-marquee-secondary: #16150f;
+  --text-marquee-accent: #2b6be3;
+  --text-hero-sub: #6b6659;
+  --text-scroll-cue: #6b6659;
+  --text-toolsbar: #6b6659;
+  --text-toolsbar-accent: #2b6be3;
+  --text-eyebrow: #2b6be3;
+  --text-eyebrow-dash: #6b6659;
+  --text-statement-highlight: #2b6be3;
+  --text-statement-dim: #6b6659;
+  --text-work-index: #2b6be3;
+  --text-work-org: #6b6659;
+  --text-work-desc: #6b6659;
+  --text-play-badge: #d7ff3f;   /* sits on a dark badge over video — stays lime */
+  --text-svc-num: #6b6659;
+  --text-svc-desc: #6b6659;
+  --text-clip-range: #2b6be3;
+  --text-clip-org: #6b6659;
+  --text-clip-item: #16150f;
+  --text-edu-org: #6b6659;
+  --text-magnetic-btn: #16150f;
+  --text-magnetic-btn-hover: #2b6be3;
+  --text-closing-phone: #6b6659;
+  --text-closing-phone-hover: #2b6be3;
+  --text-footer: #6b6659;
+
+  --color-nav-border: #16150f;
+  --color-nav-pill-dot: #2b6be3;
+  --color-cursor-default: #2b6be3;
+  --color-cursor-big: #16150f;
+  --color-scroll-line: #6b6659;
+  --color-scroll-drip: #2b6be3;
+  --color-timeline-bullet: #6b6659;
+  --color-timeline-keyframe: #2b6be3;
+  --color-video-border-hover: #2b6be3;
+  --color-video-glow: rgba(43, 107, 227, 0.12);
+  --color-focus-ring: #2b6be3;
+
+  --color-ghost-stroke: rgba(22, 21, 15, 0.09);
+  --color-work-index-bg: rgba(43, 107, 227, 0.12);
+  --color-work-index-border: rgba(43, 107, 227, 0.42);
+
+  --toggle-bg: rgba(22, 21, 15, 0.06);
+  --toggle-bg-hover: rgba(22, 21, 15, 0.12);
+  --toggle-icon: #16150f;
+}

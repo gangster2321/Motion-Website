@@ -1,0 +1,54 @@
+/* ==========================================================================
+   Component: Tools Bar
+   The infinite-scrolling marquee of software names under the hero.
+   Now more subtle — thinner, lower contrast, sits quietly between
+   hero and content.
+   ========================================================================== */
+
+.toolsbar {
+  padding: 20px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  overflow: hidden;
+  margin-bottom: 24px;
+  opacity: 0.88;
+}
+
+.toolsbar-track {
+  display: flex;
+  white-space: nowrap;
+  width: max-content;
+  animation: tools-scroll 42s linear infinite;
+  animation-iteration-count: infinite;
+  animation-fill-mode: none;
+  will-change: transform;
+}
+
+.toolsbar-track span {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: .12em;
+  color: var(--text-toolsbar);
+  padding: 0 32px;
+  position: relative;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.toolsbar-track span::after {
+  content: '/';
+  position: absolute;
+  right: 0;
+  color: var(--text-toolsbar-accent);
+  opacity: .3;
+}
+
+@keyframes tools-scroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(-33.3333%, 0, 0);
+  }
+}
