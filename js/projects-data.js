@@ -109,13 +109,6 @@ window.PORTFOLIO_PROJECTS = [
   },
   {
     company: 'Salesforce',
-    title: 'Dashboard UI Motion Study',
-    desc: 'Micro-interaction and transition animations for Salesforce admin dashboard redesign concept.',
-    tags: ['UI Motion', 'Figma'],
-    image: 'https://images.unsplash.com/photo-1542744094-3a31f272c490?w=800&h=450&fit=crop'
-  },
-  {
-    company: 'Salesforce',
     title: 'AppExchange Connector Promo',
     desc: 'Promotional video for Salesforce AppExchange partner integration with Shopify storefronts.',
     tags: ['Promo', 'Edit'],
@@ -132,20 +125,13 @@ window.PORTFOLIO_PROJECTS = [
   },
   {
     company: 'Shopify',
-    title: 'Theme Launch Graphics',
-    desc: 'Animated banner and social asset set for premium Shopify theme marketplace launch.',
-    tags: ['Graphics', 'Animation'],
-    image: 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=800&h=450&fit=crop'
-  },
-  {
-    company: 'Shopify',
     title: 'POS Integration Walkthrough',
     desc: 'Step-by-step guide video for connecting Shopify POS with external ERP and accounting systems.',
     tags: ['Tutorial', 'Screen Recording'],
     video: '_W_X_tZaCmY',
   },
 
-  /* Additional archive placeholders: 9 videos / 6 images total */
+  /* Additional archive content */
   {
     company: 'Webkul',
     title: 'Commerce Workflow Walkthrough',
@@ -154,33 +140,54 @@ window.PORTFOLIO_PROJECTS = [
     video: 'rXaskL5i3ng',
   },
   {
-    company: 'eShopSync',
-    title: 'Product Storyboard Frames',
-    desc: 'Placeholder image card for the complete project archive.',
-    tags: ['Storyboard', 'Visual Design'],
-    image: 'https://images.unsplash.com/photo-1558655146-d09347e92766?w=800&h=450&fit=crop'
-  },
-  {
-    company: 'Shopify',
-    title: 'Campaign Visual Explorations',
-    desc: 'Placeholder image card for the complete project archive.',
-    tags: ['Campaign', 'Graphics'],
-    image: 'https://images.unsplash.com/photo-1553484771-371a605b060b?w=800&h=450&fit=crop'
+    company: 'Webkul',
+    title: 'Business Analyst Hiring',
+    desc: 'Recruitment campaign artwork for a business analyst role.',
+    tags: ['Campaign', 'Social Media'],
+    image: 'assets/archive/business-analyst.png',
   },
   {
     company: 'Webkul',
-    title: 'Commerce Interface Studies',
-    desc: 'Selected interface explorations for modern commerce experiences and product storytelling.',
-    tags: ['UI Design', 'Visual Design'],
-    image: 'https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=800&h=800&fit=crop'
+    title: 'Flutter Android Developers',
+    desc: 'Recruitment campaign artwork for Flutter and Android developer roles.',
+    tags: ['Campaign', 'Social Media'],
+    image: 'assets/archive/flutter-android-developer.png',
   },
   {
-    company: 'Salesforce',
-    title: 'Product Launch Visuals',
-    desc: 'Visual direction and campaign frames created for a connected commerce product launch.',
-    tags: ['Campaign', 'Art Direction'],
-    image: 'https://images.unsplash.com/photo-1559028012-481c04fa702d?w=800&h=800&fit=crop'
-  }
+    company: 'Webkul',
+    title: 'Visual UI Designers',
+    desc: 'Creative recruitment artwork for visual UI designer opportunities.',
+    tags: ['Campaign', 'Visual Design'],
+    image: 'assets/archive/visual-ui-designer.png',
+  },
+  {
+    company: 'Webkul',
+    title: 'Walk-In PHP Developers',
+    desc: 'Recruitment campaign artwork for the Webkul PHP developer walk-in drive.',
+    tags: ['Campaign', 'Social Media'],
+    image: 'assets/archive/walk-in-php-developers.png',
+  },
+  {
+    company: 'Webkul',
+    title: 'DevOps Developers',
+    desc: 'Hiring campaign artwork for the Webkul DevOps engineering team.',
+    tags: ['Campaign', 'Social Media'],
+    image: 'assets/archive/devops-developers.png',
+  },
+  {
+    company: 'Webkul',
+    title: 'PHP Developers',
+    desc: 'Webkul recruitment artwork for PHP developer opportunities.',
+    tags: ['Campaign', 'Social Media'],
+    image: 'assets/archive/php-developers-2.png',
+  },
+  {
+    company: 'Webkul',
+    title: 'Motion Graphic Designers',
+    desc: 'Creative hiring campaign artwork for motion graphic designer roles.',
+    tags: ['Campaign', 'Motion Design'],
+    image: 'assets/archive/motion-graphic-designer.png',
+  },
 
 ];
 

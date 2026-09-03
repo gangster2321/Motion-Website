@@ -466,6 +466,7 @@
   (function () {
     const videoGrid = document.getElementById('videoGrid');
     const imageGrid = document.getElementById('imageGrid');
+    const reelGrid = document.getElementById('reelGrid');
     const projects = window.PORTFOLIO_PROJECTS;
     if (!videoGrid || !imageGrid || !Array.isArray(projects) || !projects.length) return;
 
@@ -503,15 +504,18 @@
     /* Normalize projects */
     const items = projects.map(function (p, i) {
       const video = resolve(p.video);
+      const reel = resolve(p.reel);
       const image = resolve(p.image);
+      const gallery = Array.isArray(p.gallery) ? p.gallery.filter(Boolean) : [];
       const thumb = resolve(p.thumb);
-      const type = video ? 'video' : 'image';
-      const media = video || image;
+      const type = reel ? 'reel' : (video ? 'video' : 'image');
+      const media = reel || video || image || (gallery.length ? { kind: 'gallery', image: gallery[0] } : null);
 
       let poster = null;
       if (thumb) poster = thumb.image;
       else if (type === 'image' && image) poster = image.image;
-      else if (video && video.kind !== 'file') poster = video.image;
+      else if (type === 'image' && gallery.length) poster = gallery[0];
+      else if (media && media.kind !== 'file') poster = media.image;
 
       return {
         index: i,
@@ -521,13 +525,15 @@
         featured: !!p.featured,
         type: type,
         media: media,
-        poster: poster
+        poster: poster,
+        gallery: gallery
       };
     }).filter(function (p) { return p.media; });
 
     /* Separate into video and image arrays */
     const videoItems = items.filter(function (p) { return p.type === 'video'; });
     const imageItems = items.filter(function (p) { return p.type === 'image'; });
+    const reelItems = items.filter(function (p) { return p.type === 'reel'; });
     const byIndex = {};
     items.forEach(function (p) { byIndex[p.index] = p; });
 
@@ -542,23 +548,25 @@
     /* Build card HTML */
     function buildCard(p) {
       const isVideo = p.type === 'video';
-      const label = (isVideo ? 'Play ' : 'View ') + p.title;
+      const isReel = p.type === 'reel';
+      const label = (isVideo || isReel ? 'Play ' : 'View ') + p.title;
 
       let visual;
       if (p.poster) {
-        visual = '<img src="' + esc(p.poster) + '" alt="' + esc(p.title) + '" loading="lazy">';
-      } else if (isVideo && p.media.kind === 'file') {
+        const galleryAttr = p.gallery && p.gallery.length ? ' data-gallery="' + esc(JSON.stringify(p.gallery)) + '"' : '';
+        visual = '<img class="' + (p.gallery && p.gallery.length ? 'gallery-image' : '') + '" src="' + esc(p.poster) + '" alt="' + esc(p.title) + '" loading="lazy"' + galleryAttr + '>';
+      } else if ((isVideo || isReel) && p.media.kind === 'file') {
         visual = '<video src="' + esc(p.media.embed) + '" preload="metadata" muted playsinline></video>';
       } else {
         visual = '<span class="project-thumb-fallback">' + esc(p.title.charAt(0)) + '</span>';
       }
 
       return '' +
-        '<article class="project-card" style="--card-index:' + p.index + '">' +
-          '<button type="button" class="project-thumb' + (isVideo ? ' video-thumb' : '') + '"' +
+        '<article class="project-card' + (isReel ? ' reel-card' : '') + '" style="--card-index:' + p.index + '">' +
+          '<button type="button" class="project-thumb' + ((isVideo || isReel) ? ' video-thumb' : '') + '"' +
                   ' data-item="' + p.index + '" aria-label="' + esc(label) + '">' +
             visual +
-            (isVideo ? '<span class="play-overlay">' + PLAY_SVG + '</span>' : '') +
+            ((isVideo || isReel) ? '<span class="play-overlay">' + PLAY_SVG + '</span>' : '') +
           '</button>' +
         '</article>';
     }
@@ -575,12 +583,41 @@
       imageGrid.innerHTML = imageItems.map(buildCard).join('');
     } else {
       imageGrid.style.display = 'none';
+      const imageCarousel = imageGrid.closest('.image-carousel');
+      if (imageCarousel) imageCarousel.style.display = 'none';
+      const imageHeading = document.querySelector('.image-section-heading');
+      if (imageHeading) imageHeading.style.display = 'none';
+    }
+
+    /* Render portrait 9:16 reel section when reel entries are provided. */
+    if (reelGrid && reelItems.length) {
+      reelGrid.innerHTML = reelItems.map(buildCard).join('');
+    } else if (reelGrid) {
+      reelGrid.innerHTML = '<p class="reel-empty">Your vertical reels will appear here.</p>';
     }
 
     [videoGrid, imageGrid].forEach(function (grid) {
       grid.querySelectorAll('.project-card').forEach(function (card, i) {
         card.style.setProperty('--card-index', i);
       });
+    });
+
+    /* Auto-rotate grouped gallery images inside a single placeholder. */
+    imageGrid.querySelectorAll('img[data-gallery]').forEach(function (img) {
+      let sources;
+      try { sources = JSON.parse(img.getAttribute('data-gallery')); } catch (e) { sources = []; }
+      if (!sources || sources.length < 2) return;
+      let current = 0;
+      const project = byIndex[parseInt(img.closest('.project-thumb').dataset.item, 10)];
+      window.setInterval(function () {
+        img.classList.add('is-swapping');
+        window.setTimeout(function () {
+          current = (current + 1) % sources.length;
+          img.src = sources[current];
+          if (project && project.media) project.media.image = sources[current];
+          img.classList.remove('is-swapping');
+        }, 260);
+      }, 4200);
     });
 
     /* -------- "View More" reveal --------
@@ -594,7 +631,8 @@
 
     function applyLimit() {
       let extraCount = 0;
-      [videoGrid, imageGrid].forEach(function (grid) {
+      [videoGrid, imageGrid, reelGrid].forEach(function (grid) {
+        if (!grid) return;
         const cards = grid.querySelectorAll('.project-card');
         cards.forEach(function (card, i) {
           card.classList.toggle('hidden-card', !expanded && i >= INITIAL);
@@ -608,6 +646,40 @@
     }
 
     applyLimit();
+
+    /* Horizontal image archive carousel controls. */
+    const imageCarousel = document.getElementById('imageGrid');
+    const imagePrev = document.getElementById('imageCarouselPrev');
+    const imageNext = document.getElementById('imageCarouselNext');
+    if (imageCarousel && imagePrev && imageNext) {
+      /* Keep the archive moving even when the first three cards fit exactly
+         in the viewport by appending a lightweight copy of the first card. */
+      const originalImageCards = Array.from(imageCarousel.querySelectorAll('.project-card'));
+      if (originalImageCards.length > 1 && imageCarousel.scrollWidth <= imageCarousel.clientWidth + 2) {
+        originalImageCards.forEach(function (card) {
+          const clone = card.cloneNode(true);
+          clone.setAttribute('aria-hidden', 'true');
+          imageCarousel.appendChild(clone);
+        });
+      }
+      const slideImages = (direction) => imageCarousel.scrollBy({ left: direction * imageCarousel.clientWidth * 0.82, behavior: 'smooth' });
+      imagePrev.addEventListener('click', () => slideImages(-1));
+      imageNext.addEventListener('click', () => slideImages(1));
+
+      let carouselPaused = false;
+      const moveCarousel = () => {
+        if (carouselPaused || imageCarousel.scrollWidth <= imageCarousel.clientWidth) return;
+        const atEnd = imageCarousel.scrollLeft + imageCarousel.clientWidth >= imageCarousel.scrollWidth - 8;
+        if (atEnd) imageCarousel.scrollTo({ left: 0, behavior: 'smooth' });
+        else slideImages(1);
+      };
+      const carouselTimer = window.setInterval(moveCarousel, 4200);
+      imageCarousel.addEventListener('mouseenter', () => { carouselPaused = true; });
+      imageCarousel.addEventListener('mouseleave', () => { carouselPaused = false; });
+      imageCarousel.addEventListener('focusin', () => { carouselPaused = true; });
+      imageCarousel.addEventListener('focusout', () => { carouselPaused = false; });
+      window.addEventListener('beforeunload', () => window.clearInterval(carouselTimer), { once: true });
+    }
 
     /* Interactive card tilt: movement follows the pointer, while the grid
        itself remains stationary for predictable vertical page scrolling. */
@@ -668,7 +740,7 @@
         const p = byIndex[idx];
         if (!p || !lightbox) return;
 
-        if (p.type === 'video' && lightboxFrame) {
+        if ((p.type === 'video' || p.type === 'reel') && lightboxFrame) {
           lightbox.classList.remove('is-image');
           lightboxFrame.src = p.media.embed;
         } else if (p.type === 'image' && lightboxImg) {

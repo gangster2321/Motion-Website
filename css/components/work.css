@@ -213,9 +213,83 @@
   align-items: stretch;
 }
 
+.archive-section-title {
+  margin: 34px 0 18px;
+  font-family: var(--display);
+  font-size: clamp(1.35rem, 2vw, 2rem);
+  color: var(--text-body);
+}
+.archive-section-title:first-of-type { margin-top: 24px; }
+
+.reel-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  margin-bottom: 24px;
+}
+.reel-card .project-thumb,
+.reel-card .project-thumb img,
+.reel-card .project-thumb video {
+  aspect-ratio: 9 / 16;
+}
+.reel-empty {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 48px 20px;
+  border: 1px dashed var(--line);
+  border-radius: 12px;
+  color: var(--text-hero-sub);
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 12px;
+  letter-spacing: .06em;
+}
+
 #videoGrid {
   margin-bottom: 48px;
 }
+
+.image-carousel {
+  position: relative;
+  margin-bottom: 24px;
+}
+
+.image-carousel #imageGrid {
+  display: flex;
+  gap: 18px;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  padding: 4px 2px 14px;
+  margin: 0;
+}
+
+.image-carousel #imageGrid::-webkit-scrollbar { display: none; }
+.image-carousel #imageGrid .project-card {
+  flex: 0 0 calc((100% - 36px) / 3);
+  scroll-snap-align: start;
+}
+
+.image-carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 4;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--bg);
+  color: var(--text-body);
+  font-size: 25px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background .25s ease, color .25s ease, transform .25s ease;
+}
+.image-carousel-btn:hover { background: var(--tape); color: var(--tape-ink); }
+.image-carousel-prev { left: -18px; }
+.image-carousel-next { right: -18px; }
 
 .projects-more-wrap { display: flex; justify-content: center; margin: 16px 0 8px; }
 
@@ -262,6 +336,9 @@
   display: block;
   transition: transform 0.7s ease;
 }
+
+.project-thumb .gallery-image { transition: opacity .26s ease, transform .7s ease; }
+.project-thumb .gallery-image.is-swapping { opacity: .15; }
 
 /* Image archive cards use square placeholders; video cards remain 16:9. */
 #imageGrid .project-thumb,
@@ -362,6 +439,13 @@
     grid-template-columns: 1fr;
     gap: 14px;
   }
+
+  .image-carousel #imageGrid .project-card { flex-basis: 78%; }
+  .image-carousel-btn { width: 32px; height: 32px; font-size: 22px; }
+  .image-carousel-prev { left: -8px; }
+  .image-carousel-next { right: -8px; }
+
+  .reel-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
 }
 
 /* Interactive archive cards: stable grid with a restrained 3D response. */

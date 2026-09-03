@@ -227,8 +227,16 @@
     <div class="eyebrow reveal">Project Archive</div>
     <!-- Video and image cards are generated from js/projects-data.js.
          Edit that file to change the archive. -->
+    <h2 class="archive-section-title">Videos</h2>
     <div id="videoGrid" class="reveal"></div>
-    <div id="imageGrid" class="reveal"></div>
+    <h2 class="archive-section-title image-section-heading">Images</h2>
+    <div class="image-carousel reveal">
+      <button type="button" class="image-carousel-btn image-carousel-prev" id="imageCarouselPrev" aria-label="Previous images">‹</button>
+      <div id="imageGrid"></div>
+      <button type="button" class="image-carousel-btn image-carousel-next" id="imageCarouselNext" aria-label="Next images">›</button>
+    </div>
+    <h2 class="archive-section-title reel-section-heading">Reels</h2>
+    <div id="reelGrid" class="reel-grid reveal"></div>
 
     <div class="projects-more-wrap reveal">
       <a class="projects-more-btn" id="viewMoreBtn" href="https://drive.google.com/drive/u/1/folders/11geIVhKjw-FNu2hd7ePsNvAkFSOhuHLt" target="_blank" rel="noopener">View More <span aria-hidden="true">→</span></a>
@@ -359,7 +367,7 @@
     <div>Noida, India</div>
   </footer>
 
-  <script src="js/projects-data.js?v=20260902-11"></script>
+  <script src="js/projects-data.js?v=20260903-4"></script>
   <script src="js/main.js"></script>
 </body>
 
