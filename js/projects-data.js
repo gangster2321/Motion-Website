@@ -186,4 +186,4 @@ window.PORTFOLIO_PROJECTS = [
 
 /* How many cards show before "View All Projects" is clicked. */
 window.PORTFOLIO_INITIAL_VISIBLE = 9;
-window.PORTFOLIO_ARCHIVE_URL = 'https://yourdomain.com/projects';
+window.PORTFOLIO_ARCHIVE_URL = 'https://drive.google.com/drive/u/1/folders/11geIVhKjw-FNu2hd7ePsNvAkFSOhuHLt';

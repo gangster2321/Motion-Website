@@ -17,12 +17,13 @@
   window.addEventListener('load', function () { window.scrollTo(0, 0); }, { once: true });
   window.addEventListener('pageshow', function () { window.scrollTo(0, 0); });
 
-  /* -------- Theme Toggle (2 modes: dark → light) -------- */
+  /* -------- Theme Toggle (dark → light) -------- */
   const themeToggle = document.getElementById('themeToggle');
   const html = document.documentElement;
 
   const themes = ['dark', 'light'];
-  const savedTheme = localStorage.getItem('theme') || 'dark';
+  const storedTheme = localStorage.getItem('theme');
+  const savedTheme = themes.includes(storedTheme) ? storedTheme : 'dark';
   html.setAttribute('data-theme', savedTheme);
 
   if (themeToggle) {
@@ -30,6 +31,7 @@
       const current = html.getAttribute('data-theme');
       const currentIndex = themes.indexOf(current);
       const next = themes[(currentIndex + 1) % themes.length];
+      themeToggle.setAttribute('aria-label', 'Switch to ' + themes[(themes.indexOf(next) + 1) % themes.length] + ' theme');
       const applyTheme = () => {
         html.setAttribute('data-theme', next);
         localStorage.setItem('theme', next);

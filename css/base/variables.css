@@ -141,9 +141,9 @@
   --color-work-index-border: rgba(215, 255, 63, 0.2);
 
   /* -------- toggle button -------- */
-  --toggle-bg: rgba(243, 241, 234, 0.08);
-  --toggle-bg-hover: rgba(243, 241, 234, 0.15);
-  --toggle-icon: #f3f1ea;
+  --toggle-bg: #0a0a0a;
+  --toggle-bg-hover: #171717;
+  --toggle-icon: #d4ff00;
 }
 
 /* ==========================================================================
@@ -248,7 +248,7 @@
   --color-work-index-bg: rgba(43, 107, 227, 0.12);
   --color-work-index-border: rgba(43, 107, 227, 0.42);
 
-  --toggle-bg: rgba(22, 21, 15, 0.06);
-  --toggle-bg-hover: rgba(22, 21, 15, 0.12);
-  --toggle-icon: #16150f;
+  --toggle-bg: #e7e5dc;
+  --toggle-bg-hover: #d8d6ce;
+  --toggle-icon: #2b6be3;
 }

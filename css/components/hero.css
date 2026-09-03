@@ -17,6 +17,7 @@
   background: var(--bg);
 }
 
+
 /* Aurora-style animated gradient field behind the hero content. */
 .hero::before {
   content: '';
@@ -33,9 +34,18 @@
   filter: blur(42px) saturate(125%);
   opacity: 0;
   animation: hero-aurora-drift 12s ease-in-out infinite;
+  display: none;
 }
 
 [data-theme="dark"] .hero::before { opacity: .78; }
+[data-theme="dark"] .hero-sub,
+[data-theme="dark"] .hero-social-item {
+  color: #a5a39b;
+}
+[data-theme="dark"] .hero-headline,
+[data-theme="dark"] .hero-name {
+  color: #f3f1ea;
+}
 [data-theme="light"] .hero::before {
   opacity: .34;
   filter: blur(48px) saturate(115%);
@@ -308,7 +318,6 @@
   white-space: nowrap;
   flex-shrink: 0;
   margin-right: 10px;
-  box-shadow: 0 8px 20px rgba(43, 107, 227, .24);
 }
 
 @keyframes ticker-scroll {
